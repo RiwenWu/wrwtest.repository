@@ -22,7 +22,7 @@ public class loginServler extends HttpServlet implements Servlet{
 	 * @throws ServletException if an error occurs
 	 */
 	public void init() throws ServletException {
-		System.out.println("=====start servlet=========");
+		System.out.println("=====start loginServler=========");
 	}
 
 

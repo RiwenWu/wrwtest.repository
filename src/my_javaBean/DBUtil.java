@@ -48,5 +48,26 @@ public class DBUtil {
 
 		return returnValue;
 	}
+	
+	public boolean registerSuccess(String userName,String password){
+		boolean returnValue = false;
+		String sql = "insert into admin_tb values('"+password+"','"+userName+"');";
+		Connection conn = null;
+		java.sql.Statement stmt = null;
+		int count = 0;	
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			count = stmt.executeUpdate(sql);
+			if(count>0) 
+				returnValue = true;
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returnValue;
+		
+	}
 
 }

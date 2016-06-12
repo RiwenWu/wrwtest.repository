@@ -32,7 +32,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>registerServlet</servlet-name>
-    <url-pattern>/servlet/registerServlet</url-pattern>
+    <url-pattern>/registerServlet</url-pattern>
   </servlet-mapping>
   
   <filter>

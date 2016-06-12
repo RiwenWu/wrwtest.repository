@@ -15,7 +15,7 @@ public class logoutServlet extends HttpServlet {
 	 * @throws ServletException if an error occurs
 	 */
 	public void init() throws ServletException {
-		// Put your code here
+		System.out.println("=====start logoutServlet=========");
 	}
 
 	/**

@@ -3,19 +3,25 @@ package my_Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import my_javaBean.DBUtil;
+
 public class registerServlet extends HttpServlet {
 
 	/**
-	 * Destruction of the servlet. <br>
+	 * Initialization of the servlet. <br>
+	 *
+	 * @throws ServletException if an error occurs
 	 */
-	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+	public void init() throws ServletException {
+		System.out.println("=====start registerServlet=========");
 	}
 
 	/**
@@ -30,20 +36,7 @@ public class registerServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		doPost(request, response);
 	}
 
 	/**
@@ -58,29 +51,33 @@ public class registerServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		String userName = request.getParameter("user_name");//取得用户名
+		String password = request.getParameter("user_pwd");//取得密码
+		
+		DBUtil db = new DBUtil();//构建数据库对象
+		boolean canregister = db.registerSuccess(userName, password);
+		if (canregister) {
+			System.out.println("注册成功");
+			response.sendRedirect("login.jsp");
+		}else {
+			System.out.println("注册失败");
+			response.sendRedirect("register.jsp");
+		}
+	}
+	
+	public void service(ServletRequest request, ServletResponse response)
+			throws ServletException, IOException {
+			HttpServletRequest rq = (HttpServletRequest)request;
+			HttpServletResponse rs = (HttpServletResponse) response;
+			doPost(rq,rs);
 	}
 
 	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
+	 * Destruction of the servlet. <br>
 	 */
-	public void init() throws ServletException {
-		// Put your code here
+	public void destroy() {
+		System.out.println("=====destroy registerServlet=========");
+		super.destroy(); // Just puts "destroy" string in log
 	}
 
 }
