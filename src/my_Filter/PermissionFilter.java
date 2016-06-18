@@ -35,8 +35,8 @@ public class PermissionFilter implements Filter{
 		String flag = (String) session.getAttribute("flag");
 		
 		if(servletPath != null 
-				&& (servletPath.equals("/Wed_Course_Design/login.jsp")||(servletPath
-						.equals("/Wed_Course_Design/index.jsp"))||(servletPath.equals("/Wed_Course_Design/loginServlet")))){
+				&& (servletPath.equals("/Course_Design/login.jsp")||(servletPath
+						.equals("/Course_Design/index.jsp"))||(servletPath.equals("/Course_Design/loginServlet")))){
 			chain.doFilter(request, response);
 		}else {
 			if (flag != null && flag.equals("login_success")) {

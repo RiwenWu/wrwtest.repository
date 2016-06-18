@@ -1,22 +1,29 @@
 package my_javaBean;
 
 import java.beans.Statement;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.sql.*;
+import java.time.OffsetDateTime;
+
 
 public class DBUtil {
-	boolean bInited = false;//¼ÓÔØÇý¶¯
-	public void initJDBC() throws ClassNotFoundException{//¼ÓÔØMYSQL jdbcÇý¶¯³ÌÐò
+	boolean bInited = false;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public void initJDBC() throws ClassNotFoundException{//ï¿½ï¿½ï¿½ï¿½MYSQL jdbcï¿½ï¿½ï¿½ï¿½ï¿½
 		Class.forName("com.mysql.jdbc.Driver");
 		bInited = true;
-		System.out.println("================ ³É¹¦¼ÓÔØÇý¶¯³ÌÐò ===============");
+		System.out.println("================ ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ===============");
 	}
 	
 	public Connection getConnection() throws ClassNotFoundException,SQLException {
 		if (!bInited) {
 			initJDBC();
 		}
-		//Á¬½ÓURLÎª jdbc:mysql//·þÎñÆ÷µØÖ·/Êý¾Ý¿âÃû
-		//ºóÃæµÄ2¸ö²ÎÊý·Ö±ðÊÇµÇÂ½ÓÃ»§ÃûºÍÃÜÂë
+		//ï¿½ï¿½ï¿½ï¿½URLÎª jdbc:mysql//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·/ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Çµï¿½Â½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/try","root","249991189");
 		return conn;
 	}
@@ -66,8 +73,7 @@ public class DBUtil {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return returnValue;
-		
+		return returnValue;		
 	}
-
+	
 }
