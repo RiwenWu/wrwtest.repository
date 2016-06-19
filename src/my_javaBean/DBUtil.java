@@ -11,19 +11,19 @@ import java.time.OffsetDateTime;
 
 
 public class DBUtil {
-	boolean bInited = false;//������
-	public void initJDBC() throws ClassNotFoundException{//����MYSQL jdbc�����
+	boolean bInited = false;//锟斤拷锟斤拷锟斤拷
+	public void initJDBC() throws ClassNotFoundException{//锟斤拷锟斤拷MYSQL jdbc锟斤拷锟斤拷锟�
 		Class.forName("com.mysql.jdbc.Driver");
 		bInited = true;
-		System.out.println("================ �ɹ���������� ===============");
+		System.out.println("================ 锟缴癸拷锟斤拷锟斤拷锟斤拷锟斤拷锟�===============");
 	}
 	
 	public Connection getConnection() throws ClassNotFoundException,SQLException {
 		if (!bInited) {
 			initJDBC();
 		}
-		//����URLΪ jdbc:mysql//��������ַ/��ݿ���
-		//�����2������ֱ��ǵ�½�û��������
+		//锟斤拷锟斤拷URL为 jdbc:mysql//锟斤拷锟斤拷锟斤拷锟斤拷址/锟斤拷菘锟斤拷锟�
+		//锟斤拷锟斤拷锟�锟斤拷锟斤拷锟斤拷直锟斤拷堑锟铰斤拷没锟斤拷锟斤拷锟斤拷锟斤拷
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/try","root","249991189");
 		return conn;
 	}
@@ -76,4 +76,22 @@ public class DBUtil {
 		return returnValue;		
 	}
 	
+	public void addOrderInfo(int order_id, int orderID,String orderName,
+			double orderprice, int quanty){
+		String sql = "insert into orderinfo values("+order_id+","+orderID+",'"+orderName+"',"+orderprice+","+quanty+");";
+		Connection conn = null;
+		java.sql.Statement stmt = null;
+		int count = 0;	
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			count = stmt.executeUpdate(sql);
+			if(count>0) 
+				System.out.println("数据输入成功");
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

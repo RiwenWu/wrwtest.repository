@@ -40,25 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	}
        %>
        <br/>
-       <a href="shopping_car.jsp">购物车</a>
+       <a href="shopping_car.jsp">购物中心</a>
        
-       <jsp:useBean id="conn6" class="my_javaBean.DBUtil" scope="session" />
-			<% 
-				Statement stmt=conn6.getConnection().createStatement();
-				String sql=new String();
-				sql= "select orderPicture,orderName,orderprice from images";
-				ResultSet rs=stmt.executeQuery(sql);
-				while(rs.next()){
-			 %>
-			<table>
-				<tr>
-					<td><img src="<%=rs.getString("orderPicture") %>"></img></td>
-					<td><%=rs.getString("orderName") %></td>
-					<td><%=rs.getDouble("orderprice") %></td>
-				</tr>
-				<%
-			 	}
-			 	%>
-			</table>
   </body>
 </html>
